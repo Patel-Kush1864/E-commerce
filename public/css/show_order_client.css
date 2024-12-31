@@ -1,0 +1,44 @@
+.card {
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    border-radius: 8px 0 0 8px;
+    object-fit: cover;
+    max-height: 200px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.badge {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+}
+
+.btn-outline-primary,
+.btn-outline-danger {
+    font-size: 0.85rem;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-danger:hover {
+    color: #fff;
+}
+@media (max-width: 768px) {
+    .card img {
+        max-height: 150px;
+    }
+
+    .card-body {
+        padding: 10px;
+    }
+}

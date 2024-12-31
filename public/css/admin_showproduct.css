@@ -1,0 +1,65 @@
+/* Custom Styles for Product Display Grid */
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.product-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+.product-card .card-img-top {
+    object-fit: cover;
+    height: 250px;
+}
+
+.card-title {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 0.9em;
+    color: #555;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-body .btn {
+    font-size: 0.9em;
+}
+
+.badge {
+    font-size: 0.8em;
+    color: black;
+}
+
+@media (max-width: 768px) {
+    .product-card {
+        border: 1px solid #ddd;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-title {
+        font-size: 1em;
+    }
+    .card-text {
+        font-size: 0.85em;
+    }
+}
+.product-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.product-images img {
+    width: 48%;  /* Adjust the width as needed */
+}

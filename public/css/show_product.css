@@ -1,0 +1,47 @@
+.card {
+    border: none;
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+.like-button, .add-to-cart {
+    margin-right: 10px;
+}
+
+.card-body h5 {
+    font-weight: bold;
+}
+
+.card-body p {
+    margin: 0;
+}
+.input-group input {
+    border-radius: 25px 0 0 25px;
+    box-shadow: none;
+}
+
+.input-group button {
+    border-radius: 0 25px 25px 0;
+}

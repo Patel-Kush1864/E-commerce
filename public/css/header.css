@@ -1,0 +1,69 @@
+  /* Custom Styling */
+  .navbar {
+    background: #1c1c1c; /* Dark Gray Background */
+}
+.navbar-brand, .nav-link {
+    color: white !important; /* White Links */
+    font-weight: 500;
+}
+.nav-link:hover {
+    color: #28a745 !important; /* Green Hover Effect */
+}
+.fa-icon {
+    color: white;
+    font-size: 20px;
+    margin-left: 10px;
+}
+.fa-icon:hover {
+    color: #28a745;
+}
+.form-control {
+    border-radius: 0;
+}
+.btn-search {
+    border-radius: 0;
+}
+/* .footer {
+    background: #1c1c1c;
+    color: white;
+    padding: 20px;
+    text-align: center;
+} */
+ /* Footer Styles */
+footer {
+    background-image: linear-gradient(45deg, black, transparent); /* Dark background */
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Social Icons */
+footer .social-icons a {
+    font-size: 20px;
+    margin: 0 10px;
+    transition: transform 0.3s;
+}
+
+footer .social-icons a:hover {
+    transform: scale(1.1);
+    color: #45f3ff; /* Highlight color */
+}
+
+/* Responsiveness */
+@media (max-width: 767px) {
+    footer {
+        padding: 15px;
+    }
+
+    footer .social-icons a {
+        font-size: 18px;
+        margin: 0 8px;
+    }
+
+    footer .container p {
+        font-size: 0.8em;
+    }
+}

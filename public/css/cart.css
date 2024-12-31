@@ -1,0 +1,56 @@
+.cart-items-container {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.cart-item {
+  border: 1px solid #e3e6e8;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.product-image {
+  max-height: 150px;
+  object-fit: contain;
+  padding: 10px;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.quantity-input {
+  width: 50px;
+}
+
+.item-total-price {
+  font-weight: bold;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  color: #212529;
+}
+
+.btn-primary {
+  background-color: #2874f0;
+  border-color: #2874f0;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+.cart-items-container {
+  height: 600px; /* Set a fixed height for scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.card-body {
+  position: sticky;
+  top: 20px; /* Adjust the offset from the top of the viewport */
+  z-index: 1000; /* Ensure it stays above other elements */
+}

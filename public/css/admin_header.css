@@ -1,0 +1,119 @@
+/* General styles */
+body {
+    background-color: #121212; /* Dark background */
+    color: #ffffff; /* Light text for readability */
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #1f1f1f; /* Dark gray background for the navbar */
+    border-bottom: 1px solid #333333; /* Subtle border for separation */
+}
+
+.navbar-brand {
+    color: #000000;
+    font-weight: bold;
+}
+
+.navbar-toggler {
+    background-color: #333333; /* Darker background for toggler */
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23ffffff' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.navbar-nav .nav-link {
+    color: #000000; /* Light gray text */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #000000; /* Bright text on hover */
+}
+
+.navbar-nav .nav-link.active {
+    color: #000000; /* Highlight active link with blue */
+}
+
+/* Sidebar styles */
+.sidebar {
+    background-color: #1f1f1f; /* Dark background */
+    color: #ffffff;
+    min-height: 100vh;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar .nav-link {
+    color: #cccccc;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.sidebar .nav-link.active {
+    background-color: #767676;
+    color: #ffffff;
+}
+
+/* Sidebar heading styles */
+.sidebar-heading {
+    color: #aaaaaa;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-top: 20px;
+    padding-left: 15px;
+}
+
+/* Saved Reports Section */
+.sidebar .nav.flex-column.mb-2 .nav-link {
+    color: #cccccc;
+}
+
+.sidebar .nav.flex-column.mb-2 .nav-link:hover {
+    color: #ffffff;
+}
+
+.sidebar .nav.flex-column.mb-2 .nav-link.active {
+    color: #767676;
+}
+
+/* Main content styles */
+main {
+    background-color: #ffffff; /* Slightly lighter for content contrast */
+    color: #000000;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Input and search styles */
+.form-control-dark {
+    background-color: #333333;
+    border: none;
+    color: #000000;
+}
+
+.form-control-dark::placeholder {
+    color: #000000;
+}
+
+/* Button styles */
+.nav-link.px-3 {
+    color: #000000;
+    background-color: #333333;
+    border: 1px solid #555555;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-link.px-3:hover {
+    background-color: #767676;
+    color: #000000;
+}
+
