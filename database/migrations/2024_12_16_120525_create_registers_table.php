@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('registers', function (Blueprint $table) {
             $table->id();
-            $table->string('Name',30);
-            $table->string('Email',20)->unique();
-            $table->string('Gender',10);
-            $table->string('Password',8);
+            $table->string('name',30);
+            $table->string('email',20)->unique();
+            $table->string('gender',10);
+            $table->string('password',8);
             $table->timestamps();
         });
     }

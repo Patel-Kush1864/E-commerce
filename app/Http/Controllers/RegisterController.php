@@ -25,7 +25,7 @@ class RegisterController extends Controller
          }
  
          // Fetch all products with category details
-         $products = Product::with(['category', 'images'])->where('Status', 'Active')->paginate(12);
+         $products = Product::with(['category', 'images'])->where('status', 'Active')->paginate(12);
 
          // Return view with products
          return view('show_product', compact('products'));
@@ -47,10 +47,10 @@ class RegisterController extends Controller
         try {
             // Attempt to insert the data
             Register::create([
-                "Name"=> $request->Name,
-                "Email"=> $request->Email,
-                "Gender"=> $request->Gender,
-                "Password"=> $request->Password,
+                "name"=> $request->Name,
+                "email"=> $request->Email,
+                "gender"=> $request->Gender,
+                "password"=> $request->Password,
             ]);
 
             // If successful, redirect with a success message

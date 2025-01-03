@@ -31,9 +31,6 @@ class ProductController extends Controller
         return view("add_product",compact("categories"));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(ProductRequest $request)
     {
         // return "HELLO";
@@ -53,22 +50,22 @@ class ProductController extends Controller
         
         $product=Product::create([
             "category_id"=> $request->category_id,
-            "ProductName"=> $request->ProductName,
-            "ProductPrice"=> $request->ProductPrice,
-            "Brand"=> $request->Brand,
-            "ModelNumber"=> $request->ModelNumber,
-            "WarrantyPeriod"=> $request->WarrantyPeriod,
-            "ProductStock"=> $request->ProductStock,
-            "Status"=> $request->Status,
-            "Description"=> $request->Description,
+            "productname"=> $request->ProductName,
+            "productprice"=> $request->ProductPrice,
+            "brand"=> $request->Brand,
+            "modelnumber"=> $request->ModelNumber,
+            "warrantyperiod"=> $request->WarrantyPeriod,
+            "status"=> $request->Status,
+            "productstock"=> $request->ProductStock,
+            "description"=> $request->Description,
         ]);
 
-        
+        // return $product;        
         // Insert image data into the ProductImages table with the product ID
         foreach ($imagenames as $imagename) {
             ProductImage::create([
-                "Product_id" => $product->Prod_id, // Associate with the product
-                "ProductImage" => $imagename, // Store image name as string
+                "product_id" => $product->id, // Associate with the product
+                "productimage" => $imagename, // Store image name as string
             ]);
         }
        

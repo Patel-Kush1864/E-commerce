@@ -12,12 +12,12 @@ class Cartitem extends Model
 
     public function order()
     {
-        return $this->belongsTo(Order::class, 'Cart_id'); // Foreign key is Cart_id
+        return $this->belongsTo(Order::class, 'cart_id'); // Foreign key is Cart_id
     }
 
     public function product()
     {
-        return $this->belongsTo(Product::class, 'Prod_id'); // Foreign key is Prod_id
+        return $this->belongsTo(Product::class, 'product_id'); // Foreign key is Prod_id
     }
     
 }

@@ -21,11 +21,11 @@ class LoginController extends Controller
         ]);
 
           // Fetch user and admin data
-          $user = DB::table('registers')->where('Name', $request->Name)->first();
-          $admin = DB::table('admins')->where('Name', $request->Name)->first();
+          $user = DB::table('registers')->where('name', $request->Name)->first();
+          $admin = DB::table('admins')->where('name', $request->Name)->first();
   
           // Check if the user exists and the password matches
-          if ($user && $user->Password === $request->Password) {
+          if ($user && $user->password === $request->Password) {
             
               // Set session variable for client login
               Session::put('client_id', $user->id); // Store client ID in session
@@ -37,7 +37,7 @@ class LoginController extends Controller
           }
   
           // Check if the admin exists and the password matches
-          if ($admin && $admin->Password === $request->Password) {
+          if ($admin && $admin->password === $request->Password) {
               // Admin login successful
                // User login successful
              

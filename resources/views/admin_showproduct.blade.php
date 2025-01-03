@@ -31,7 +31,7 @@
                                 @endphp
                     
                                 @if($image) 
-                                    <img src="{{ asset('Products/'.$image->ProductImage) }}" 
+                                    <img src="{{ asset('Products/'.$image->productimage) }}" 
                                          alt="Product Image" 
                                          class="card-img-top img-fluid" 
                                          style="height: 250px; object-fit: cover;">
@@ -43,13 +43,13 @@
                                 @endif
                                 {{-- <img src="{{ asset('Products/'.$product->ProductImage) }}" alt="Product Image" class="card-img-top img-fluid" style="height: 250px; object-fit: cover;"> --}}
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ $product->ProductName }}</h5>
-                                    <p class="card-text">{{ optional($product->category)->Cate_Name ?? 'N/A' }}
+                                    <h5 class="card-title">{{ $product->productname }}</h5>
+                                    <p class="card-text">{{ optional($product->category)->categoryname ?? 'N/A' }}
                                     </p>
-                                    <p class="card-text"><strong>&#8377;{{ number_format($product->ProductPrice, 2) }}</strong></p>
-                                    <p class="card-text"><strong>Stock :- {{ $product->ProductStock }}</strong></p>
+                                    <p class="card-text"><strong>&#8377;{{ number_format($product->productprice, 2) }}</strong></p>
+                                    <p class="card-text"><strong>Stock :- {{ $product->productstock }}</strong></p>
                                     <p class="card-text">
-                                        @if($product->Status == 'Active')
+                                        @if($product->status == 'Active')
                                         <span class="badge badge-success">Active</span>
                                         @else
                                         <span class="badge badge-danger">Inactive</span>

@@ -12,21 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id('Order_id');
-            $table->unsignedBigInteger('Client_id');  // Foreign key column
-            $table->foreign('Client_id')->references('id')->on('registers')->onDelete('cascade')->onUpdate('cascade');
+            $table->id();
+            $table->unsignedBigInteger('client_id');  // Foreign key column
+            $table->foreign('client_id')->references('id')->on('registers')->onDelete('cascade')->onUpdate('cascade');
             $table->json('cartitems_id'); // Store cart item IDs as a JSON array
-            $table->string('Fullname',100);
-            $table->string('Email',30);
-            $table->string('Country',30);
-            $table->text('Address');
-            $table->bigInteger('Mobile_no');
-            $table->bigInteger('Pincode');
-            $table->bigInteger('Total_items');
-            $table->bigInteger('Subtotal');
-            $table->bigInteger('Shipping_charges');
-            $table->bigInteger('Total_amount');
-            $table->string('Status');
+            $table->string('fullname',100);
+            $table->string('email',30);
+            $table->string('country',30);
+            $table->text('address');
+            $table->bigInteger('mobile_no');
+            $table->bigInteger('pincode');
+            $table->bigInteger('total_items');
+            $table->bigInteger('subtotal');
+            $table->bigInteger('shipping_charges');
+            $table->bigInteger('total_amount');
+            $table->string('status');
             $table->timestamps();
         });
     }

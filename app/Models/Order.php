@@ -9,11 +9,10 @@ class Order extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $primaryKey = 'Order_id';
 
     public function cartItems()
     {
-        return $this->hasMany(CartItem::class, 'Cart_id'); // Ensure the foreign keys match
+        return $this->hasMany(CartItem::class, 'cart_id'); // Ensure the foreign keys match
     }
 
 }

@@ -83,7 +83,7 @@
                 @endphp
     
                 @if($image) 
-                    <img src="{{ asset('Products/'.$image->ProductImage) }}" 
+                    <img src="{{ asset('Products/'.$image->productimage) }}" 
                             alt="Product Image" 
                             class="card-img-top img-fluid" 
                             style="height: 250px; object-fit: cover;">
@@ -95,19 +95,19 @@
                 @endif
                
                 <!-- Like Icon (Top Right Corner) -->
-                <a href="{{ route('cart.heart',$product->Prod_id) }}"  class="btn btn-danger btn-sm like-button position-absolute" 
+                <a href="{{ route('cart.heart',$product->id) }}"  class="btn btn-danger btn-sm like-button position-absolute" 
                 style="top: 10px; right: 10px; z-index: 10;"><i class="fa-regular fa-heart"></i></a>
 
                 <div class="card-body text-center">
-                    <h5 class="card-title">{{ $product->ProductName }}</h5>
+                    <h5 class="card-title">{{ $product->productname }}</h5>
                     <p class="card-text text-muted">
-                        {{ optional($product->category)->Cate_Name ?? 'Uncategorized' }}
+                        {{ optional($product->category)->categoryname ?? 'Uncategorized' }}
                     </p>
                     <p class="card-text">
-                        <strong>&#8377;{{ number_format($product->ProductPrice, 2) }}</strong>
+                        <strong>&#8377;{{ number_format($product->productprice, 2) }}</strong>
                     </p>
                     <p>
-                        @if($product->Status == 'Active')
+                        @if($product->status == 'Active')
                             <span class="badge badge-success">Available</span>
                         @else
                             <span class="badge badge-danger">Unavailable</span>
@@ -120,10 +120,10 @@
                     </button> --}}
 
                     <!-- Add to Cart Button -->
-                    <a href="{{ route('cart.addtocart',$product->Prod_id) }}" class="btn btn-outline-success btn-sm add-to-cart"><i class="fa-solid fa-cart-plus"></i>Add to Cart</a>
+                    <a href="{{ route('cart.addtocart',$product->id) }}" class="btn btn-outline-success btn-sm add-to-cart"><i class="fa-solid fa-cart-plus"></i>Add to Cart</a>
 
                     <!-- View Details Button -->
-                    <a href="{{ route('Product.show',$product->Prod_id) }} " class="btn btn-outline-success btn-sm">
+                    <a href="{{ route('Product.show',$product->id) }} " class="btn btn-outline-success btn-sm">
                         <i class="fa-solid fa-eye"></i> View Details
                     </a>
 

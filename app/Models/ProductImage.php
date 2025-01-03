@@ -10,8 +10,6 @@ class ProductImage extends Model
     use HasFactory;
     protected $guarded = [];
 
-    protected $primaryKey = 'Img_id';
-
     // Define the relationship with Product
     public function product()
     {

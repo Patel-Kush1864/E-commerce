@@ -10,18 +10,17 @@ class Product extends Model
     use HasFactory;
     protected $guarded = [];
 
-    protected $primaryKey = 'Prod_id';
-
    
+    
     public function category()
     {
-        return $this->belongsTo(Category::class,'category_id','Cate_id');
+        return $this->belongsTo(Category::class, 'category_id'); // Specify foreign key if needed
     }
-
-    // Define the relationship with ProductImage
+    // // Define the relationship with ProductImage
     public function images()
     {
-        return $this->hasMany(ProductImage::class, 'Product_id');
+        return $this->hasMany(ProductImage::class, 'product_id');
     }
+  
     
 }

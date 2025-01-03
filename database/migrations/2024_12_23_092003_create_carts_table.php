@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('carts', function (Blueprint $table) {
-            $table->id('Cart_id');
-            $table->unsignedBigInteger('Client_id');  // Foreign key column
-            $table->foreign('Client_id')->references('id')->on('registers')->onDelete('cascade')->onUpdate('cascade');
-            $table->boolean('Is_wishlist');
+            $table->id();
+            $table->unsignedBigInteger('client_id');  // Foreign key column
+            $table->foreign('client_id')->references('id')->on('registers')->onDelete('cascade')->onUpdate('cascade');
+            $table->boolean('is_wishlist');
             $table->timestamps();
         });
     }

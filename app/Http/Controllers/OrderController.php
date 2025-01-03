@@ -20,7 +20,7 @@ class OrderController extends Controller
       
         // Apply search filter
         if ($request->search) {
-            $fields = ['Fullname', 'Email', 'Order_id'];
+            $fields = ['fullname', 'email', 'id'];
             $search = $request->search;
             $query->where(function ($q) use ($fields, $search) {
                 foreach ($fields as $field) {
@@ -32,17 +32,17 @@ class OrderController extends Controller
 
         // Apply status filter
         if ($request->status) {
-            $query->where('Status', $request->status);
+            $query->where('status', $request->status);
         }
 
         // Apply sorting
         if ($request->sortBy) {
             switch ($request->sortBy) {
                 case 'amount_asc':
-                    $query->orderBy('Total_amount', 'asc');
+                    $query->orderBy('total_amount', 'asc');
                     break;
                 case 'amount_desc':
-                    $query->orderBy('Total_amount', 'desc');
+                    $query->orderBy('total_amount', 'desc');
                     break;
                 case 'date_asc':
                     $query->orderBy('created_at', 'asc');
@@ -97,10 +97,10 @@ class OrderController extends Controller
     
         // Fetch the cart for the client (assumes that each client has one active cart)
         $cart = Cart::where('client_id', $clientId)
-                    ->where('Is_wishlist', false)
+                    ->where('is_wishlist', false)
                     ->first();
         // return $cart;
-        $id=$cart->Cart_id;
+        $id=$cart->id;
         // return $id;
         
         // Check if cart exists
@@ -109,23 +109,23 @@ class OrderController extends Controller
         }
 
         // Get the cart items for the client's active cart
-        $cartItems = Cartitem::where('Cart_id', $id)->get();
+        $cartItems = Cartitem::where('cart_id', $id)->get();
         // return $cartItems;
         
         
         foreach ($cartItems as $cartItem) {
             // Get the product ID from the cart item
-            $pid = $cartItem->Prod_id;
-            $qty = $cartItem->Quantities;
+            $pid = $cartItem->product_id;
+            $qty = $cartItem->quantities;
 
             // Fetch the product details for this product ID
-            $product = Product::where('Prod_id', $pid)->first();
+            $product = Product::where('id', $pid)->first();
 
             // Check if the product exists and has enough stock
             if ($product) {
-                if ($product->ProductStock >= $qty) {
+                if ($product->productstock >= $qty) {
                     // Update the ProductStock by subtracting the quantity from the cart item
-                    $product->ProductStock -= $qty;
+                    $product->productstock -= $qty;
                     $product->save();  // Save the updated product record
                 } else {
                     // If there's not enough stock, you can return an error message or handle the case accordingly
@@ -136,10 +136,10 @@ class OrderController extends Controller
 
 
         // Calculate the total items and subtotal from the cart items
-        $totalItems = $cartItems->sum('Quantities'); // Case-sensitive
+        $totalItems = $cartItems->sum('quantities'); // Case-sensitive
         // return $totalItems;
         $subtotal = $cartItems->sum(function ($item) {
-            return $item->product->ProductPrice * $item->Quantities;
+            return $item->product->productprice * $item->quantities;
         });
 
         // Define the shipping charges (fixed or calculated based on logic)
@@ -152,17 +152,17 @@ class OrderController extends Controller
         $order = Order::create([
             'client_id' => $clientId,
             'cartitems_id' => json_encode($cartItems->pluck('id')->toArray()), // Serialize array
-            'Fullname' => $request->input('fullName'),
-            'Email' => $request->input('fullemail'),
-            'Country' => $request->input('fullcountry'),
-            'Address' => $request->input('address'),
-            'Mobile_no' => $request->input('mobile'),
-            'Pincode' => $request->input('pincode'),
-            'Total_items' => $totalItems,
-            'Subtotal' => $subtotal,
-            'Shipping_charges' => $shippingCharges,
-            'Total_amount' => $totalAmount,
-            'Status' => 'pending',
+            'fullname' => $request->input('fullName'),
+            'email' => $request->input('fullemail'),
+            'country' => $request->input('fullcountry'),
+            'address' => $request->input('address'),
+            'mobile_no' => $request->input('mobile'),
+            'pincode' => $request->input('pincode'),
+            'total_items' => $totalItems,
+            'subtotal' => $subtotal,
+            'shipping_charges' => $shippingCharges,
+            'total_amount' => $totalAmount,
+            'status' => 'pending',
         ]);
 
         // Optionally, you can clear the cart items after placing the order
@@ -196,8 +196,8 @@ class OrderController extends Controller
             $product = $cartItem->product; // Assuming the relationship is set up between Cartitem and Product
     
             // Calculate the quantity and price for each item in the cart
-            $quantity = $cartItem->Quantities;
-            $price = $product->ProductPrice;
+            $quantity = $cartItem->quantities;
+            $price = $product->productprice;
     
             // Add to total quantity and total price
             $totalQuantity += $quantity;

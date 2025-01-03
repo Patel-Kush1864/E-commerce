@@ -71,30 +71,30 @@
             @if($item->product)  <!-- Check if product exists -->
               @if($item->product->images->isNotEmpty())  <!-- Ensure product images exist -->
                 <div class="d-flex align-items-center mb-3">
-                  <img src="{{ asset('Products/'.$item->product->images->first()->ProductImage) }}" alt="{{ $item->product->ProductName }}" class="order-image me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                  <img src="{{ asset('Products/'.$item->product->images->first()->productimage) }}" alt="{{ $item->product->productname }}" class="order-image me-3" style="width: 50px; height: 50px; object-fit: cover;">
                   <div>
-                    <h6 class="mb-1">{{ $item->product->ProductName }}</h6>
-                    <p class="text-muted mb-0">₹{{ number_format($item->product->ProductPrice, 2) }}</p>
-                    <p class="text-muted mb-0">Quantity: {{ $item->Quantities }}</p> <!-- Correct Quantity reference -->
+                    <h6 class="mb-1">{{ $item->product->productname }}</h6>
+                    <p class="text-muted mb-0">₹{{ number_format($item->product->productprice, 2) }}</p>
+                    <p class="text-muted mb-0">Quantity: {{ $item->quantities }}</p> <!-- Correct Quantity reference -->
                   </div>
                 </div>
                 @php
-                  $totalPrice += $item->product->ProductPrice * $item->Quantities;  // Correctly calculate price based on Quantity
-                  $totalQuantity += $item->Quantities;  // Add to total quantity
+                  $totalPrice += $item->product->productprice * $item->quantities;  // Correctly calculate price based on Quantity
+                  $totalQuantity += $item->quantities;  // Add to total quantity
                 @endphp
               @else
                 <!-- Fallback if images are missing -->
                 <div class="d-flex align-items-center mb-3">
                   <img src="{{ asset('default-placeholder.png') }}" alt="No Image Available" class="order-image me-3" style="width: 50px; height: 50px; object-fit: cover;">
                   <div>
-                    <h6 class="mb-1">{{ $item->product->ProductName }}</h6>
-                    <p class="text-muted mb-0">₹{{ number_format($item->product->ProductPrice, 2) }}</p>
-                    <p class="text-muted mb-0">Quantity: {{ $item->Quantities }}</p> <!-- Correct Quantity reference -->
+                    <h6 class="mb-1">{{ $item->product->productname }}</h6>
+                    <p class="text-muted mb-0">₹{{ number_format($item->product->productprice, 2) }}</p>
+                    <p class="text-muted mb-0">Quantity: {{ $item->quantities }}</p> <!-- Correct Quantity reference -->
                   </div>
                 </div>
                 @php
-                  $totalPrice += $item->product->ProductPrice * $item->Quantities;  // Correctly calculate price based on Quantity
-                  $totalQuantity += $item->Quantities;  // Add to total quantity
+                  $totalPrice += $item->product->productprice * $item->quantities;  // Correctly calculate price based on Quantity
+                  $totalQuantity += $item->quantities;  // Add to total quantity
                 @endphp
               @endif
             @else

@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('cartitems', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('Cart_id');  // Foreign key column
-            $table->foreign('Cart_id')->references('Cart_id')->on('carts')->onDelete('cascade')->onUpdate('cascade');
-            $table->unsignedBigInteger('Prod_id');  // Foreign key column
-            $table->foreign('Prod_id')->references('Prod_id')->on('products')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('Quantities'); // Column to store product quantities as JSON
-            $table->decimal('Price');
+            $table->unsignedBigInteger('cart_id');  // Foreign key column
+            $table->foreign('cart_id')->references('id')->on('carts')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('product_id');  // Foreign key column
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('quantities'); // Column to store product quantities as JSON
+            $table->decimal('price');
             $table->timestamps();
         });
     }

@@ -18,21 +18,21 @@
   <h1 class="mb-4">Order Details</h1>
   <div class="card shadow">
     <div class="card-header bg-primary text-white">
-      <h5 class="mb-0"><i class="fas fa-box"></i> Order ID: {{ $order->Order_id }}</h5>
+      <h5 class="mb-0"><i class="fas fa-box"></i> Order ID: {{ $order->id }}</h5>
     </div>
     <div class="card-body">
       <!-- Customer Info -->
       <h5 class="text-secondary mb-3"><i class="fas fa-user"></i> Customer Information</h5>
       <div class="row mb-4">
         <div class="col-md-6">
-          <p><strong>Name:</strong> {{ $order->Fullname }}</p>
-          <p><strong>Email:</strong> {{ $order->Email }}</p>
-          <p><strong>Mobile:</strong> {{ $order->Mobile_no }}</p>
+          <p><strong>Name:</strong> {{ $order->fullname }}</p>
+          <p><strong>Email:</strong> {{ $order->email }}</p>
+          <p><strong>Mobile:</strong> {{ $order->mobile_no }}</p>
         </div>
         <div class="col-md-6">
-          <p><strong>Address:</strong> {{ $order->Address }}</p>
-          <p><strong>Pincode:</strong> {{ $order->Pincode }}</p>
-          <p><strong>Country:</strong> {{ $order->Country }}</p>
+          <p><strong>Address:</strong> {{ $order->address }}</p>
+          <p><strong>Pincode:</strong> {{ $order->pincode }}</p>
+          <p><strong>Country:</strong> {{ $order->country }}</p>
         </div>
       </div>
 
@@ -40,22 +40,22 @@
       <h5 class="text-secondary mb-3"><i class="fas fa-shopping-cart"></i> Order Summary</h5>
       <div class="row mb-4">
         <div class="col-md-6">
-          <p><strong>Total Items:</strong> {{ $order->Total_items }}</p>
-          <p><strong>Subtotal:</strong> ₹{{ number_format($order->Subtotal, 2) }}</p>
-          <p><strong>Shipping Charges:</strong> ₹{{ number_format($order->Shipping_charges, 2) }}</p>
+          <p><strong>Total Items:</strong> {{ $order->total_items }}</p>
+          <p><strong>Subtotal:</strong> ₹{{ number_format($order->subtotal, 2) }}</p>
+          <p><strong>Shipping Charges:</strong> ₹{{ number_format($order->shipping_charges, 2) }}</p>
         </div>
         <div class="col-md-6">
-          <p><strong>Total Amount:</strong> <span class="text-success">₹{{ number_format($order->Total_amount, 2) }}</span></p>
-          <form action="{{ route('Order.updateStatus', $order->Order_id) }}" method="POST">
+          <p><strong>Total Amount:</strong> <span class="text-success">₹{{ number_format($order->total_amount, 2) }}</span></p>
+          <form action="{{ route('Order.updateStatus', $order->id) }}" method="POST">
             @csrf
             @method('PUT')
             <p><strong>Status:</strong>
               <select name="status" class="status-select form-control d-inline" onchange="this.form.submit()">
-                <option value="pending" {{ $order->Status == 'pending' ? 'selected' : '' }}>Pending</option>
-                <option value="confirmed" {{ $order->Status == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
-                <option value="delivered" {{ $order->Status == 'delivered' ? 'selected' : '' }}>Delivered</option>
-                <option value="need_to_pickup" {{ $order->Status == 'need_to_pickup' ? 'selected' : '' }}>Need to Pickup</option>
-                <option value="picked_up" {{ $order->Status == 'picked_up' ? 'selected' : '' }}>Picked Up</option>
+                <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                <option value="confirmed" {{ $order->status == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
+                <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
+                <option value="need_to_pickup" {{ $order->status == 'need_to_pickup' ? 'selected' : '' }}>Need to Pickup</option>
+                <option value="picked_up" {{ $order->status == 'picked_up' ? 'selected' : '' }}>Picked Up</option>
               </select>
             </p>
           </form>
@@ -79,10 +79,10 @@
           @foreach ($cartItems as $key => $cartItem)
             <tr>
               <td>{{ $key + 1 }}</td>
-              <td>{{ $cartItem->product ? $cartItem->product->ProductName : 'Product not found' }}</td>
-              <td>{{ $cartItem->Prod_id }}</td>
-              <td>{{ $cartItem->Quantities }}</td>
-              <td>₹{{ number_format($cartItem->Price, 2) }}</td>
+              <td>{{ $cartItem->product ? $cartItem->product->productname : 'Product not found' }}</td>
+              <td>{{ $cartItem->product_id }}</td>
+              <td>{{ $cartItem->quantities }}</td>
+              <td>₹{{ number_format($cartItem->price, 2) }}</td>
             </tr>
           @endforeach
         </tbody>

@@ -21,8 +21,8 @@
                                 $image = $item->product->images->first();
                             @endphp
                             @if($image)
-                                <img src="{{ asset('Products/'.$image->ProductImage) }}" 
-                                     alt="{{ $item->product->ProductName }}" 
+                                <img src="{{ asset('Products/'.$image->productimage) }}" 
+                                     alt="{{ $item->product->productname }}" 
                                      class="product-image">
                             @else
                                 <img src="{{ asset('Products/default.jpg') }}" 
@@ -31,11 +31,11 @@
                             @endif
                         </div>
                         <div class="col-12 text-center">
-                            <h2 class="product-title">{{ $item->product->ProductName }}</h2>
-                            <p class="product-price">&#8377;{{ number_format($item->product->ProductPrice, 2) }}</p>
+                            <h2 class="product-title">{{ $item->product->productname }}</h2>
+                            <p class="product-price">&#8377;{{ number_format($item->product->productprice, 2) }}</p>
                             <div class="btn-action">
                                 <a href="" class="btn btn-primary btn-sm">View Product</a>
-                                <a href="{{ route('wishlist.remove', $item->product->Prod_id) }}" class="btn btn-danger btn-sm">Remove</a>
+                                <a href="{{ route('wishlist.remove', $item->product->id) }}" class="btn btn-danger btn-sm">Remove</a>
                             </div>
                         </div>
                     </div>

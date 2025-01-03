@@ -9,12 +9,11 @@ class Cart extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'Cart_id';
     protected $guarded = [];
 
     public function cartItems()
     {
-        return $this->hasMany(Cartitem::class, 'Cart_id');
+        return $this->hasMany(Cartitem::class, 'cart_id');
     }
    
 }

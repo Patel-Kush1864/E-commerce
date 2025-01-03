@@ -10,8 +10,6 @@ class Category extends Model
     use HasFactory;
     protected $guarded = [];
 
-    protected $primaryKey = 'Cate_id';
-
      // Define the relationship with Product
      public function products()
      {

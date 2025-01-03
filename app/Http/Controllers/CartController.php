@@ -31,8 +31,8 @@ class CartController extends Controller
         // return $prodId;
 
         // Check if a cart exists for the client
-        $cart = Cart::where('Client_id', $clientId)
-                      ->where('Is_wishlist', true)
+        $cart = Cart::where('client_id', $clientId)
+                      ->where('is_wishlist', true)
                       ->first();
 
         // Debug if the cart exists
@@ -48,14 +48,13 @@ class CartController extends Controller
         // If no cart exists, create a new one
         if (!$cart) {
             $cart = Cart::create([
-                'Client_id' => $clientId,
-                'Is_wishlist' => true,
+                'client_id' => $clientId,
+                'is_wishlist' => true,
             ]);
         }
         // Check if the product already exists in the cartitems table
-        $cartItem = Cartitem::where('Cart_id', $cart->Cart_id)
-                    ->where('Prod_id', $prodId)
-                    
+        $cartItem = Cartitem::where('cart_id', $cart->id)
+                    ->where('product_id', $prodId)
                     ->first();
        
         // Debug if the cart item exists
@@ -71,10 +70,10 @@ class CartController extends Controller
         // If no cart item exists, insert it
         if (!$cartItem) {
             $cartItem = Cartitem::create([
-                'Cart_id' => $cart->Cart_id,
-                'Prod_id' => $prodId,
-                'Quantities' => 1,
-                'Price' => 0,
+                'cart_id' => $cart->id,
+                'product_id' => $prodId,
+                'quantities' => 1,
+                'price' => 0,
             ]);
 
             // Redirect with success message
@@ -109,7 +108,7 @@ class CartController extends Controller
         $prodId = $id;
 
         // Check if the product exists in the Product table
-        $product = Product::where('Prod_id', $id)->first();
+        $product = Product::where('id', $id)->first();
         
         if (!$product) {
             return redirect()->route('Register.index')->with('error', 'Product not found.');
@@ -119,8 +118,8 @@ class CartController extends Controller
         // return $prodId;
 
         // Check if a cart exists for the client
-        $cart = Cart::where('Client_id', $clientId)
-                      ->where('Is_wishlist', false)
+        $cart = Cart::where('client_id', $clientId)
+                      ->where('is_wishlist', false)
                       ->first();
 
         // Debug if the cart exists
@@ -136,14 +135,14 @@ class CartController extends Controller
         // If no cart exists, create a new one
         if (!$cart) {
             $cart = Cart::create([
-                'Client_id' => $clientId,
-                'Is_wishlist' => false,
+                'client_id' => $clientId,
+                'is_wishlist' => false,
             ]);
         }
 
         // Check if the product already exists in the cartitems table
-        $cartItem = Cartitem::where('Cart_id', $cart->Cart_id)
-                    ->where('Prod_id', $prodId)
+        $cartItem = Cartitem::where('cart_id', $cart->id)
+                    ->where('product_id', $prodId)
                     ->first();
        
         // Debug if the cart item exists
@@ -159,10 +158,10 @@ class CartController extends Controller
         // If no cart item exists, insert it
         if (!$cartItem) {
             $cartItem = Cartitem::create([
-                'Cart_id' => $cart->Cart_id,
-                'Prod_id' => $prodId,
-                'Quantities' => 1,
-                'Price' => $product->ProductPrice, // Use ProductPrice directly from the fetched model
+                'cart_id' => $cart->id,
+                'product_id' => $prodId,
+                'quantities' => 1,
+                'price' => $product->productprice, // Use ProductPrice directly from the fetched model
             ]);
 
             // Redirect with success message
@@ -186,8 +185,8 @@ class CartController extends Controller
         }
 
         // Fetch the wishlist cart for the client
-        $wishlist = Cart::where('Client_id', $clientId)
-            ->where('Is_wishlist', true)
+        $wishlist = Cart::where('client_id', $clientId)
+            ->where('is_wishlist', true)
             ->with(['cartItems.product']) // Assuming a relation to products
             ->first();
 
@@ -214,8 +213,8 @@ class CartController extends Controller
         }
 
         // Fetch the cart for the client where Is_wishlist is false
-        $cart = Cart::where('Client_id', $clientId)
-            ->where('Is_wishlist', false)
+        $cart = Cart::where('client_id', $clientId)
+            ->where('is_wishlist', false)
             ->with(['cartItems.product']) // Assuming a relation to products
             ->first();
        
@@ -241,8 +240,8 @@ class CartController extends Controller
         }
 
          // Find the cart that is a wishlist for the client
-        $cart = Cart::where('Client_id', $clientId)
-                    ->where('Is_wishlist', true)
+        $cart = Cart::where('client_id', $clientId)
+                    ->where('is_wishlist', true)
                     ->first();
 
         if (!$cart) {
@@ -250,8 +249,8 @@ class CartController extends Controller
         }
     
         // Find the cart item by its ID and Cart_id
-        $cartItem = Cartitem::where('Cart_id', $cart->Cart_id)
-            ->where('Prod_id', $id)
+        $cartItem = Cartitem::where('cart_id', $cart->id)
+            ->where('product_id', $id)
             ->delete();
 
         if (!$cartItem) {
@@ -274,8 +273,8 @@ class CartController extends Controller
         }
 
          // Find the cart that is a wishlist for the client
-        $cart = Cart::where('Client_id', $clientId)
-                    ->where('Is_wishlist', false)
+        $cart = Cart::where('client_id', $clientId)
+                    ->where('is_wishlist', false)
                     ->first();
         
         if (!$cart) {
@@ -283,8 +282,8 @@ class CartController extends Controller
         }
     
         // Find the cart item by its ID and Cart_id
-        $cartItem = Cartitem::where('Cart_id', $cart->Cart_id)
-            ->where('Prod_id', $id)
+        $cartItem = Cartitem::where('cart_id', $cart->id)
+            ->where('product_id', $id)
             ->delete();
 
         if (!$cartItem) {
@@ -303,19 +302,19 @@ class CartController extends Controller
         $pid = $request->Prod_id;
 
         // Use first() to get a single CartItem instance
-        $cartItem = CartItem::where('Cart_id', $id)
-                            ->where('Prod_id', $pid)
+        $cartItem = CartItem::where('cart_id', $id)
+                            ->where('product_id', $pid)
                             ->first(); // Use first() instead of get()
 
         // return $cartItem;
         // Check if the cartItem is found
         if ($cartItem) {
-            $cartItem->Quantities = $request->quantity;
-            $cartItem->Price = $cartItem->product->ProductPrice * $request->quantity;
+            $cartItem->quantities = $request->quantity;
+            $cartItem->price = $cartItem->product->productprice * $request->quantity;
             $cartItem->save();
 
-            $cartItem=Cartitem::where('Cart_id', $id)
-                            ->where('Prod_id', $pid)
+            $cartItem=Cartitem::where('cart_id', $id)
+                            ->where('product_id', $pid)
                             ->get();
            
             return redirect()
@@ -355,7 +354,7 @@ class CartController extends Controller
         // Assuming that the Cart table has a client_id field that links to the user/client
         $cart = Cart::with('cartItems.product.images')  // Eager load cartItems, product, and product images
                     ->where('client_id', $clientId)
-                    ->where('Is_wishlist', false)
+                    ->where('is_wishlist', false)
                     ->first();
         // return $cart;
         if (!$cart) {

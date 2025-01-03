@@ -66,24 +66,24 @@
         <tbody>
           @foreach($orders as $order)
           <tr>
-            <td>{{ $order->Order_id }}</td>
-            <td>{{ $order->Fullname }}</td>
-            <td>{{ $order->Email }}</td>
-            <td>{{ $order->Total_items }}</td>
-            <td>₹{{ number_format($order->Total_amount, 2) }}</td>
+            <td>{{ $order->id }}</td>
+            <td>{{ $order->fullname }}</td>
+            <td>{{ $order->email }}</td>
+            <td>{{ $order->total_items }}</td>
+            <td>₹{{ number_format($order->total_amount, 2) }}</td>
             <td>
               <span class="badge 
-                @if($order->Status == 'pending') bg-warning 
-                @elseif($order->Status == 'confirmed') bg-info 
-                @elseif($order->Status == 'delivered') bg-success 
-                @elseif($order->Status == 'need_to_pickup') bg-primary 
+                @if($order->status == 'pending') bg-warning 
+                @elseif($order->status == 'confirmed') bg-info 
+                @elseif($order->status == 'delivered') bg-success 
+                @elseif($order->status == 'need_to_pickup') bg-primary 
                 @else bg-secondary 
                 @endif">
-                {{ ucfirst($order->Status) }}
+                {{ ucfirst($order->status) }}
               </span>
             </td>
             <td>
-              <a href="{{ route('Order.show', $order->Order_id) }}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i> View</a>
+              <a href="{{ route('Order.show', $order->id) }}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i> View</a>
             </td>
           </tr>
           @endforeach

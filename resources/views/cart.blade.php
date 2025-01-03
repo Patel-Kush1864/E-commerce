@@ -30,17 +30,17 @@
             @php
                 $image = $item->product->images->first();
             @endphp
-            <img src="{{ asset($image ? 'Products/'.$image->ProductImage : 'Products/default.jpg') }}" 
+            <img src="{{ asset($image ? 'Products/'.$image->productimage : 'Products/default.jpg') }}" 
                  class="img-fluid product-image" 
-                 alt="{{ $item->product->ProductName }}">
+                 alt="{{ $item->product->productname }}">
           </div>
           <div class="col-md-6">
             <div class="card-body">
-              <h5 class="card-title">{{ $item->product->ProductName }}</h5>
-              <p class="card-text text-muted">{{ $item->product->Description }}</p>
+              <h5 class="card-title">{{ $item->product->productname }}</h5>
+              <p class="card-text text-muted">{{ $item->product->description }}</p>
               <p class="card-text">Price: 
                 <span class="item-price" id="item-price-{{ $item->id }}">
-                  &#8377;{{ number_format($item->product->ProductPrice, 2) }}
+                  &#8377;{{ number_format($item->product->productprice, 2) }}
                 </span>
               </p>
             </div>
@@ -49,11 +49,11 @@
             <div class="quantity-control mb-2">
               <form action="{{ route('cart.update') }}" method="POST" class="d-inline update-cart-form">
                   @csrf
-                  <input type="hidden" name="cart_id" value="{{ $item->Cart_id }}">
-                  <input type="hidden" name="Prod_id" value="{{ $item->product->Prod_id }}">
-                  <input type="hidden" name="quantity" value="{{ $item->Quantities - 1 }}" class="decrease-quantity">
+                  <input type="hidden" name="cart_id" value="{{ $item->cart_id }}">
+                  <input type="hidden" name="Prod_id" value="{{ $item->product->id }}">
+                  <input type="hidden" name="quantity" value="{{ $item->quantities - 1 }}" class="decrease-quantity">
           
-                  <button type="submit" class="btn btn-outline-secondary decrease-btn" data-cart-id="{{ $item->id }}" data-price="{{ $item->product->ProductPrice }}">
+                  <button type="submit" class="btn btn-outline-secondary decrease-btn" data-cart-id="{{ $item->id }}" data-price="{{ $item->product->productprice }}">
                       -
                   </button>
               </form>
@@ -62,24 +62,24 @@
                   type="text" 
                   id="qty-{{ $item->id }}" 
                   class="form-control text-center Quantities-input d-inline-block my-2" 
-                  value="{{ $item->Quantities }}" 
+                  value="{{ $item->quantities }}" 
                   readonly>
           
               <form action="{{ route('cart.update') }}" method="POST" class="d-inline update-cart-form">
                   @csrf
-                  <input type="hidden" name="cart_id" value="{{ $item->Cart_id  }}">
-                  <input type="hidden" name="Prod_id" value="{{ $item->product->Prod_id }}">
-                  <input type="hidden" name="quantity" value="{{ $item->Quantities + 1 }}" class="increase-quantity">
+                  <input type="hidden" name="cart_id" value="{{ $item->cart_id  }}">
+                  <input type="hidden" name="Prod_id" value="{{ $item->product->id }}">
+                  <input type="hidden" name="quantity" value="{{ $item->quantities + 1 }}" class="increase-quantity">
           
-                  <button type="submit" class="btn btn-outline-secondary increase-btn" data-cart-id="{{ $item->id }}" data-price="{{ $item->product->ProductPrice }}">
+                  <button type="submit" class="btn btn-outline-secondary increase-btn" data-cart-id="{{ $item->id }}" data-price="{{ $item->product->productprice }}">
                       +
                   </button>
               </form>
             </div>
-            <p class="item-total-price text-primary" id="item-total-price-{{ $item->Cart_id }}">
-              &#8377;{{ number_format($item->product->ProductPrice * ($item->Quantities ?: 1), 2) }}
+            <p class="item-total-price text-primary" id="item-total-price-{{ $item->cart_id }}">
+              &#8377;{{ number_format($item->product->productprice * ($item->quantities ?: 1), 2) }}
           </p>
-            <form action="{{ route('addtocart.remove',$item->product->Prod_id) }}" method="POST">
+            <form action="{{ route('addtocart.remove',$item->product->id) }}" method="POST">
               @csrf
               @method('DELETE')
               <button type="submit" class="btn btn-danger btn-sm mb-3">Remove</button>
@@ -98,17 +98,17 @@
           <hr>
           <div class="d-flex justify-content-between">
             <p>Total Items</p>
-            <p id="total-items">{{ $cartItems->sum('Quantities') }}</p>
+            <p id="total-items">{{ $cartItems->sum('quantities') }}</p>
         </div>
         <div class="d-flex justify-content-between">
             <p>Total Price</p>
-            <p id="cart-total">&#8377;{{ number_format($cartItems->sum(function($item) { return $item->product->ProductPrice * ($item->Quantities); }), 2) }}</p>
+            <p id="cart-total">&#8377;{{ number_format($cartItems->sum(function($item) { return $item->product->productprice * ($item->quantities); }), 2) }}</p>
         </div>
           <hr>
           <form action="{{ route('Cart.delivery') }}" method="POST" >
             @csrf
             <input type="hidden" name="total_items" id="hidden-total-items" value="{{ $cartItems->count() }}">
-            <input type="hidden" name="total_amount" id="hidden-total-amount" value="{{ $cartItems->sum(function ($item) { return $item->product->ProductPrice * ($item->quantity ?: 1); }) }}">       
+            <input type="hidden" name="total_amount" id="hidden-total-amount" value="{{ $cartItems->sum(function ($item) { return $item->product->productprice * ($item->quantity ?: 1); }) }}">       
             <button type="submit" class="btn btn-primary btn-block">Proceed to Checkout</button>
           </form>
           {{-- <button class="btn btn-primary btn-block">Proceed to Checkout</button> --}}
