@@ -34,6 +34,12 @@ Route::get('/', function () {
 Route::post('/login', [LoginController::class, 'login_user'])->name('login_user');
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 
+// Route for forget password form
+Route::get('/forget_password', [LoginController::class, 'forget_password'])->name('forget_password');
+
+// Route for processing the password update
+Route::post('/forget_password', [LoginController::class, 'update_password'])->name('forget_pwd');
+
 Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('Register.showRegisterForm');
 Route::resource('Register',RegisterController::class);
 

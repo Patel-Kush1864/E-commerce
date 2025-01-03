@@ -183,6 +183,7 @@
     document.getElementById("hidden-total-amount").value = total;
     document.getElementById("hidden-total-items").value = totalItems;
 }
+
     document.querySelectorAll(".increase-btn").forEach((button) => {
         button.addEventListener("click", function () {
             let cartId = this.getAttribute("data-cart-id");

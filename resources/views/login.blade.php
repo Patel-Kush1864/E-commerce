@@ -1,3 +1,4 @@
+
 @extends('header')
 @section('section')
 <link rel="stylesheet" href="{{ asset('css/login.css') }}">
@@ -19,7 +20,12 @@
             window.location.href = '/login';
         </script>
         @endif
-
+        @if(session('success_pwd'))
+        <script>
+            alert("{{ session('success_pwd') }}");
+            window.location.href = '/login';
+        </script>
+        @endif
         @if(session('error'))
             <script>
                 alert("{{ session('error') }}");
@@ -27,7 +33,7 @@
         @endif
         <form action="{{route('login_user') }}" method="POST">
             @csrf
-            <h2>Sign in</h2>
+            <h2>Forget Password</h2>
             <div class="inputBox">
                 <input type="text" name="Name" required>
                 <span>Username</span>
@@ -39,7 +45,7 @@
                 <i></i>
             </div>
             <div class="links">
-                <a href="#">Forgot Password</a>
+                <a href="{{ route('forget_password') }}">Forgot Password</a>
                 <a href="{{route('Register.showRegisterForm') }}">Signup</a>
             </div>
             <input type="submit" id="submit" value="Login">

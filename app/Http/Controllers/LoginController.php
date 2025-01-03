@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use App\Models\Register;
+use App\Models\Admin;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -49,7 +51,46 @@ class LoginController extends Controller
           return redirect('/login')->with('error', 'Invalid email or password.');
        
     }
-   
+    public function forget_password(Request $request)
+    {
+        return view('forget_password');
+    }
+
+    public function update_password(Request $request)
+    {
+        // return "Hello";
+        // Validate the incoming request
+        $request->validate([
+            'Email' => 'required|email',
+            'Password' => 'required|min:6',
+            'password_confirm'=> 'required|min:6|confirmed',// 'confirmed' ensures the password matches 'password_confirm'
+        ]);
+        // return $request->Email;
+        // Check if the email exists in the `registers` or `admins` table
+        $user = Register::where('email', $request->Email)->first();
+        $admin =Admin::where('email', $request->Email)->first();
+        // return $user;
+        if ($user) {
+            // Update user password
+            $user->update([
+                'password' => $request->Password, // Hash the password before storing1ssssssss
+            ]);
+
+            return redirect('/login')->with('success_pwd', 'Password updated successfully!');
+        } elseif ($admin) {
+            // Update admin password
+            $admin->update([
+                'password' => $request->Password, // Hash the password before storing
+            ]);
+
+            return redirect('/login')->with('success_pwd', 'Password updated successfully!');
+        }
+
+        // If email is not found
+        return redirect()->back()->with('error', 'Email not found!');
+    }
+
+
     public function logout()
     {
         // Clear the session
