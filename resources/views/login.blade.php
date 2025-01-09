@@ -33,7 +33,7 @@
         @endif
         <form action="{{route('login_user') }}" method="POST">
             @csrf
-            <h2>Forget Password</h2>
+            <h2>Login</h2>
             <div class="inputBox">
                 <input type="text" name="Name" required>
                 <span>Username</span>
