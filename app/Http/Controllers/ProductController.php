@@ -59,7 +59,7 @@ class ProductController extends Controller
             "productstock"=> $request->ProductStock,
             "description"=> $request->Description,
         ]);
-
+        // dd($product);
         // return $product;        
         // Insert image data into the ProductImages table with the product ID
         foreach ($imagenames as $imagename) {
